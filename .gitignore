@@ -2,4 +2,4 @@
 .classpath
 .project
 .settings/
-src/main/resources/applicationsettings/mqsettings
+src/main/resources/settings/applicationsettings/mqsettings/
