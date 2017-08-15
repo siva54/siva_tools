@@ -12,6 +12,7 @@
 		<commons-lang3-version>3.3</commons-lang3-version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j2.version>2.8.2</log4j2.version>
+		<ibm.mq.version>8.0.0.5</ibm.mq.version>
 	</properties>
 
 	<dependencies>
@@ -60,6 +61,38 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j2.version}</version>
+		</dependency>
+
+		<!-- IBM MQ API dependencies -->
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.pcf</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mqjms</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.jmqi</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.headers</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.commonservices</artifactId>
+			<version>${ibm.mq.version}</version>
 		</dependency>
 	</dependencies>
 </project>

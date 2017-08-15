@@ -10,6 +10,17 @@ public class Constants {
 	public static final String TEMPLATE_OUTPUT_FOLDER = "template_output_folder";
 
 	/**
+	 * MQ constants
+	 */
+	public static String MQ_HOST = ".broker.host";
+	public static String MQ_PORT = ".broker.port";
+	public static String MQ_CHANNEL = ".broker.channel";
+	public static String MQ_QUEUEMGRNAME = ".broker.queueMgrName";
+	public static String MQ_QUEUENAME = ".broker.queueName";
+	public static String BO = ".BO";
+	public static String BAD = ".BAD";
+
+	/**
 	 * Template data Generator constants
 	 */
 	public static final String EVENTID = "#EventID";
@@ -18,5 +29,7 @@ public class Constants {
 	/**
 	 * Commons constants
 	 */
-	public static final String COMMA_SEPERATOR = ",";
+	public static final String COMMA_DELIMITER = ",";
+	public static final String UNDERSCORE_DELIMITER = "_";
+	public static final String DOT_DELIMITER = ".";
 }

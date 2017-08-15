@@ -1,0 +1,7 @@
+Please put the properties for mq in the following way,
+
+<<env>>.broker.host=<<value>>
+<<env>>.broker.port=<<value>>
+<<env>>.broker.channel=<<value>>
+<<env>>.broker.queueMgrName=<<value>>
+<<env>>.broker.queueName=<<value>>

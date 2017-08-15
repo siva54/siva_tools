@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -29,14 +29,17 @@ import com.siva.utility.SettingsManager;
 @Component
 public class TemplateDataGenerator {
 	public static void main(String[] args) {
+		AbstractApplicationContext context = null;
 		try {
-			ApplicationContext context = new ClassPathXmlApplicationContext(
+			context = new ClassPathXmlApplicationContext(
 					"spring/base-application-context.xml");
 			TemplateDataGenerator templateDataGenerator = context
 					.getBean(TemplateDataGenerator.class);
 			templateDataGenerator.process();
 		} catch (Exception exception) {
 			exception.printStackTrace();
+		} finally {
+			context.close();
 		}
 	}
 
@@ -79,7 +82,7 @@ public class TemplateDataGenerator {
 			if (StringUtils.isNotBlank(StringUtils.trim(dataElement))) {
 				String[] inputElements = StringUtils.split(
 						StringUtils.trim(dataElement),
-						Constants.COMMA_SEPERATOR);
+						Constants.COMMA_DELIMITER);
 
 				String[] replacementArray = new String[inputElements.length];
 				for (int i = 0; i < inputElements.length; i++) {

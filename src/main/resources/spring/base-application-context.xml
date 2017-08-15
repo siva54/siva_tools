@@ -15,6 +15,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath:settings/applicationsettings/*.properties</value>
+				<value>classpath:settings/applicationsettings/mqsettings/prod/*.properties</value>
 			</list>
 		</property>
 	</bean>
