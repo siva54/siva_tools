@@ -4,9 +4,19 @@
 	<groupId>com.siva.tools</groupId>
 	<artifactId>com.siva.tools</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>File Tools</name>
+	<name>Siva's Tools</name>
+
+	<properties>
+		<spring.version>4.3.10.RELEASE</spring.version>
+	</properties>
 
 	<dependencies>
+		<!-- Spring Dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
