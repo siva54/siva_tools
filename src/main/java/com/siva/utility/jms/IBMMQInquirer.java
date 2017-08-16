@@ -27,9 +27,7 @@ import com.siva.utility.SettingsManager;
 public class IBMMQInquirer {
 
 	private static String[] ENV = new String[] { "PROD_HODM_1", "PROD_HODM_2",
-			"PROD_US_NDM_1", "PROD_US_NDM_2" };
-
-	// , "PROD_UK_NDM_1", "PROD_UK_NDM_2" };
+			"PROD_US_NDM_1", "PROD_US_NDM_2", "PROD_UK_NDM_1", "PROD_UK_NDM_2" };
 
 	public static void main(String[] args) {
 
