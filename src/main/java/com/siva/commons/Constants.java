@@ -8,6 +8,7 @@ public class Constants {
 	public static final String TEMPLATE_SKELETON_FILE = "template_skeleton_file";
 	public static final String TEMPLATE_DATA_FILE = "template_data_file";
 	public static final String TEMPLATE_OUTPUT_FOLDER = "template_output_folder";
+	public static final String MQ_DESTINATION_FOLDER = "mq_destination_folder";
 
 	/**
 	 * MQ constants
@@ -32,4 +33,5 @@ public class Constants {
 	public static final String COMMA_DELIMITER = ",";
 	public static final String UNDERSCORE_DELIMITER = "_";
 	public static final String DOT_DELIMITER = ".";
+	public static final String SLASH_DELIMITER = "/";
 }
