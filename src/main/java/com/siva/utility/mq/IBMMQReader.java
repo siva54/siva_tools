@@ -1,4 +1,4 @@
-package com.siva.utility.jms;
+package com.siva.utility.mq;
 
 import java.io.File;
 import java.io.IOException;
