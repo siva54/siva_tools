@@ -2,6 +2,7 @@ package com.siva.utility.jms;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -31,7 +32,23 @@ import com.siva.utility.SettingsManager;
  */
 @Component
 public class IBMMQReader {
-	private static String[] ENV = new String[] { "DEV_US_NDM_1" };
+	// private static final String[] ENV = new String[] { "DEV_US_NDM_1" };
+	private static String[] ENV = new String[] { "PROD_US_NDM_1",
+			"PROD_US_NDM_2" };
+	private static final DataDumpStrategy DUMP_STRATEGY = DataDumpStrategy.SINGLE_FILE;
+
+	private static final String EXTENSION = ".xml";
+
+	@SuppressWarnings("unchecked")
+	private static final String SINGLE_FILE_NAME = StringUtils.join("data",
+			Constants.UNDERSCORE_DELIMITER, System.currentTimeMillis(),
+			EXTENSION);
+
+	private static final String SINGLE_FILE_BAD_SUFFIX = "]]>\n";
+	private static final String SINGLE_FILE_BAD_PREFIX = "<![CDATA[";
+
+	private static final String SINGLE_FILE_BO_SUFFIX = "----\n";
+	private static final String SINGLE_FILE_BO_PREFIX = "</jms>";
 
 	public static void main(String[] args) {
 		AbstractApplicationContext context = null;
@@ -43,7 +60,8 @@ public class IBMMQReader {
 			System.out
 					.println("********************************************************************");
 			for (String environment : ENV) {
-				mqReader.process(environment, QueueType.BO);
+				// mqReader.process(environment, QueueType.BO);
+				mqReader.process(environment, QueueType.BAD);
 				System.out
 						.println("********************************************************************");
 			}
@@ -59,8 +77,6 @@ public class IBMMQReader {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(IBMMQReader.class);
-
-	private static final String EXTENSION = ".xml";
 
 	/**
 	 * Method to process a given request.
@@ -124,7 +140,7 @@ public class IBMMQReader {
 
 		MQQueue destQueue = qMgr.accessQueue(mqQueue, openOptions, null, null,
 				null);
-		System.out.println("MQRead connected.\n");
+		System.out.println("MQRead connected for " + queueType + ".\n");
 
 		int depth = destQueue.getCurrentDepth();
 		if (depth > 0) {
@@ -145,8 +161,30 @@ public class IBMMQReader {
 				byte[] b = new byte[message.getMessageLength()];
 				message.readFully(b);
 
-				FileUtils.writeByteArrayToFile(new File(destinationFolder,
-						StringUtils.join(count, EXTENSION)), b);
+				switch (DUMP_STRATEGY) {
+				case SINGLE_FILE:
+					switch (queueType) {
+					case BO:
+						FileUtils.write(new File(destinationFolder,
+								SINGLE_FILE_NAME), StringUtils.join(
+								SINGLE_FILE_BO_PREFIX, new String(b),
+								SINGLE_FILE_BO_SUFFIX), Charset
+								.defaultCharset(), true);
+						break;
+					case BAD:
+						FileUtils.write(new File(destinationFolder,
+								SINGLE_FILE_NAME), StringUtils.join(
+								SINGLE_FILE_BAD_PREFIX, new String(b),
+								SINGLE_FILE_BAD_SUFFIX), Charset
+								.defaultCharset(), true);
+						break;
+					}
+					break;
+				case INDIVIDUAL_FILES:
+					FileUtils.writeByteArrayToFile(new File(destinationFolder,
+							StringUtils.join(count, EXTENSION)), b, false);
+					break;
+				}
 
 				message.clearMessage();
 			} catch (IOException e) {
@@ -167,6 +205,16 @@ public class IBMMQReader {
 		}
 		destQueue.close();
 		qMgr.disconnect();
+	}
+
+	/**
+	 * Enumeration for data dumping strategy from queue.
+	 * 
+	 * @author sksees1
+	 *
+	 */
+	static enum DataDumpStrategy {
+		SINGLE_FILE, INDIVIDUAL_FILES;
 	}
 
 	/**
