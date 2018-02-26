@@ -8,15 +8,22 @@
 
 	<!-- Component scan package -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.siva" />
+	<context:component-scan base-package="com.siva">
+		<context:exclude-filter type="regex"
+			expression="com\.example\.ignore\..*" />
+	</context:component-scan>
 
 	<bean id="applicationSettings"
 		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations">
 			<list>
 				<value>classpath:settings/applicationsettings/*.properties</value>
-				<value>classpath:settings/applicationsettings/mqsettings/prod/*.properties</value>
-				<value>classpath:settings/applicationsettings/mqsettings/dev/*.properties</value>
+				<value>classpath:settings/applicationsettings/mqsettings/prod/*.properties
+				</value>
+				<value>classpath:settings/applicationsettings/mqsettings/qa-int/*.properties
+				</value>
+				<value>classpath:settings/applicationsettings/mqsettings/dev/*.properties
+				</value>
 			</list>
 		</property>
 	</bean>

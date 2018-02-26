@@ -3,104 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.siva.tools</groupId>
 	<artifactId>com.siva.tools</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Siva's Tools</name>
 
-	<properties>
-		<spring.version>4.3.10.RELEASE</spring.version>
-		<commons.io.version>2.5</commons.io.version>
-		<commons-lang3-version>3.3</commons-lang3-version>
-		<slf4j.version>1.7.25</slf4j.version>
-		<log4j2.version>2.8.2</log4j2.version>
-		<ibm.mq.version>8.0.0.5</ibm.mq.version>
-		<jasypt.version>1.9.2</jasypt.version>
-	</properties>
-
-	<dependencies>
-		<!-- Spring Dependencies -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<!-- Commons IO dependency -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons.io.version}</version>
-		</dependency>
-
-		<!-- Commons-lang3 dependency -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang3-version}</version>
-		</dependency>
-
-		<!-- SLF4J dependency -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-
-		<!-- SLF4J-Log4J2 bridge dependency -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j2.version}</version>
-		</dependency>
-
-		<!-- Log4J2 dependencies -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>${log4j2.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j2.version}</version>
-		</dependency>
-
-		<!-- IBM MQ API dependencies -->
-		<dependency>
-			<groupId>com.ibm</groupId>
-			<artifactId>com.ibm.mq</artifactId>
-			<version>${ibm.mq.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm</groupId>
-			<artifactId>com.ibm.mq.pcf</artifactId>
-			<version>${ibm.mq.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm</groupId>
-			<artifactId>com.ibm.mqjms</artifactId>
-			<version>${ibm.mq.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm</groupId>
-			<artifactId>com.ibm.mq.jmqi</artifactId>
-			<version>${ibm.mq.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm</groupId>
-			<artifactId>com.ibm.mq.headers</artifactId>
-			<version>${ibm.mq.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm</groupId>
-			<artifactId>com.ibm.mq.commonservices</artifactId>
-			<version>${ibm.mq.version}</version>
-		</dependency>
-
-		<!-- JASYPT dependency -->
-		<dependency>
-			<groupId>org.jasypt</groupId>
-			<artifactId>jasypt</artifactId>
-			<version>${jasypt.version}</version>
-		</dependency>
-	</dependencies>
+	<parent>
+		<groupId>com.siva</groupId>
+		<artifactId>siva-commons</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 </project>

@@ -32,9 +32,9 @@ import com.siva.utility.SettingsManager;
  */
 @Component
 public class IBMMQReader {
-	// private static final String[] ENV = new String[] { "DEV_US_NDM_1" };
 	private static String[] ENV = new String[] { "PROD_US_NDM_1",
-			"PROD_US_NDM_2" };
+			"PROD_US_NDM_2", "PROD_UK_NDM_1", "PROD_UK_NDM_2", "PROD_CA_NDM_1",
+			"PROD_CA_NDM_2", "PROD_HODM_1", "PROD_HODM_2" };
 	private static final DataDumpStrategy DUMP_STRATEGY = DataDumpStrategy.SINGLE_FILE;
 
 	private static final String EXTENSION = ".xml";
@@ -60,7 +60,6 @@ public class IBMMQReader {
 			System.out
 					.println("********************************************************************");
 			for (String environment : ENV) {
-				// mqReader.process(environment, QueueType.BO);
 				mqReader.process(environment, QueueType.BAD);
 				System.out
 						.println("********************************************************************");
@@ -133,6 +132,8 @@ public class IBMMQReader {
 		MQEnvironment.channel = mqChannel;
 		MQEnvironment.properties.put(MQC.TRANSPORT_PROPERTY,
 				MQC.TRANSPORT_MQSERIES);
+		MQEnvironment.userID = "";
+		MQEnvironment.password = "";
 		qMgr = new MQQueueManager(mqQMgr);
 
 		int openOptions = MQC.MQOO_INQUIRE + MQC.MQOO_FAIL_IF_QUIESCING

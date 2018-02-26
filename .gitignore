@@ -3,3 +3,5 @@
 .project
 .settings/
 src/main/resources/settings/applicationsettings/mqsettings/
+src/main/resources/data/templates/GIF/
+src/main/resources/data/sample/json/GIF/

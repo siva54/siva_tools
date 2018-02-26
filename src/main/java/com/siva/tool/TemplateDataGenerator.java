@@ -4,7 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
@@ -61,46 +66,87 @@ public class TemplateDataGenerator {
 		File sourceFile = new File((String) settingsManager
 				.getApplicationSettings().get(Constants.TEMPLATE_DATA_FILE));
 
-		File destinationFolder = new File((String) settingsManager
-				.getApplicationSettings().get(Constants.TEMPLATE_OUTPUT_FOLDER));
+		// File destinationFolder = new File((String) settingsManager
+		// .getApplicationSettings().get(Constants.TEMPLATE_OUTPUT_FOLDER));
 
 		File templateFile = new File((String) settingsManager
 				.getApplicationSettings().get(Constants.TEMPLATE_SKELETON_FILE));
+
+		final File destinationFolder = new File("C:\\output5\\input");
 
 		System.out
 				.println("File that is being scanned for generating the receive event is "
 						+ sourceFile.getAbsolutePath());
 
 		LineIterator lt = FileUtils.lineIterator(sourceFile);
-		String templateString = FileUtils.readFileToString(templateFile,
+		final String templateString = FileUtils.readFileToString(templateFile,
 				Charset.defaultCharset());
 
-		int count = 0;
-		while (lt.hasNext()) {
-			String dataElement = (String) lt.next();
+		Stream<String> dataStream = StreamSupport.stream(
+				Spliterators.spliteratorUnknownSize(lt, Spliterator.ORDERED),
+				true);
 
-			if (StringUtils.isNotBlank(StringUtils.trim(dataElement))) {
-				String[] inputElements = StringUtils.split(
-						StringUtils.trim(dataElement),
-						Constants.COMMA_DELIMITER);
+		dataStream.peek(new Consumer<String>() {
+			int count = 0;
+			@Override
+			public void accept(String dataElement) {
+				if (StringUtils.isNotBlank(StringUtils.trim(dataElement))) {
+					String[] inputElements = StringUtils.split(
+							StringUtils.trim(dataElement),
+							Constants.COMMA_DELIMITER);
 
-				String[] replacementArray = new String[inputElements.length];
-				for (int i = 0; i < inputElements.length; i++) {
-					replacementArray[i] = Constants.CHECK + (i + 1);
+					String[] replacementArray = new String[inputElements.length];
+					for (int i = 0; i < inputElements.length; i++) {
+						replacementArray[i] = Constants.CHECK + (i + 1);
+					}
+
+					String finalData = StringUtils.replace(StringUtils
+							.replaceEach(templateString, replacementArray,
+									inputElements), Constants.EVENTID, String
+							.valueOf(UUID.randomUUID()));
+
+					String fileName = count + EXTENSION;
+					try {
+						FileUtils.writeStringToFile(new File(destinationFolder,
+								fileName), finalData, Charset.defaultCharset(),
+								false);
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+
+					LOGGER.info("Successfully written file : " + fileName
+							+ " ,Current count is : " + count);
+					count = count + 1;
 				}
-
-				String finalData = StringUtils.replace(StringUtils.replaceEach(
-						templateString, replacementArray, inputElements),
-						Constants.EVENTID, String.valueOf(UUID.randomUUID()));
-
-				String fileName = count + EXTENSION;
-				FileUtils.writeStringToFile(new File(destinationFolder,
-						fileName), finalData, Charset.defaultCharset(), false);
-
-				LOGGER.info("Successfully written file : " + fileName
-						+ " ,Current count is : " + count);
-				count = count + 1;
 			}
-		}
+		});
+
+		// int count = 0;
+		// while (lt.hasNext()) {
+		// String dataElement = (String) lt.next();
+		//
+		// if (StringUtils.isNotBlank(StringUtils.trim(dataElement))) {
+		// String[] inputElements = StringUtils.split(
+		// StringUtils.trim(dataElement),
+		// Constants.COMMA_DELIMITER);
+		//
+		// String[] replacementArray = new String[inputElements.length];
+		// for (int i = 0; i < inputElements.length; i++) {
+		// replacementArray[i] = Constants.CHECK + (i + 1);
+		// }
+		//
+		// String finalData = StringUtils.replace(StringUtils.replaceEach(
+		// templateString, replacementArray, inputElements),
+		// Constants.EVENTID, String.valueOf(UUID.randomUUID()));
+		//
+		// String fileName = count + EXTENSION;
+		// FileUtils.writeStringToFile(new File(destinationFolder,
+		// fileName), finalData, Charset.defaultCharset(), false);
+		//
+		// LOGGER.info("Successfully written file : " + fileName
+		// + " ,Current count is : " + count);
+		// count = count + 1;
+		// }
+		// }
 	}
 }
