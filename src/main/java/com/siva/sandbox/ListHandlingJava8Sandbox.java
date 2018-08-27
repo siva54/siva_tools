@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Java8Sandbox {
+public class ListHandlingJava8Sandbox {
 	public static void main(String[] args) {
 		List<Demon> demonList = new ArrayList<Demon>();
 		demonList.add(new Demon("fire", "Diablo", 10));
