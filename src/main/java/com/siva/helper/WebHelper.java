@@ -29,6 +29,9 @@ import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.protocol.RequestUserAgent;
 import org.apache.http.util.EntityUtils;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class WebHelper {
 	public Optional<WebResponse> postMessage(WebRequest request)
 			throws UnknownHostException, IOException, HttpException {
@@ -79,6 +82,8 @@ public class WebHelper {
 		return Optional.empty();
 	}
 
+	@Getter
+	@Setter
 	class WebRequest {
 		String host;
 		String path;
@@ -86,146 +91,13 @@ public class WebHelper {
 		String contentType;
 		Map<String, Object> queryParams;
 		Map<String, Object> headerParams;
-
-		/**
-		 * @return the host
-		 */
-		public String getHost() {
-			return host;
-		}
-
-		/**
-		 * @param host
-		 *            the host to set
-		 */
-		public void setHost(String host) {
-			this.host = host;
-		}
-
-		/**
-		 * @return the path
-		 */
-		public String getPath() {
-			return path;
-		}
-
-		/**
-		 * @param path
-		 *            the path to set
-		 */
-		public void setPath(String path) {
-			this.path = path;
-		}
-
-		/**
-		 * @return the messageBody
-		 */
-		public String getMessageBody() {
-			return messageBody;
-		}
-
-		/**
-		 * @return the contentType
-		 */
-		public String getContentType() {
-			return contentType;
-		}
-
-		/**
-		 * @param contentType
-		 *            the contentType to set
-		 */
-		public void setContentType(String contentType) {
-			this.contentType = contentType;
-		}
-
-		/**
-		 * @param messageBody
-		 *            the messageBody to set
-		 */
-		public void setMessageBody(String messageBody) {
-			this.messageBody = messageBody;
-		}
-
-		/**
-		 * @return the queryParams
-		 */
-		public Map<String, Object> getQueryParams() {
-			return queryParams;
-		}
-
-		/**
-		 * @param queryParams
-		 *            the queryParams to set
-		 */
-		public void setQueryParams(Map<String, Object> queryParams) {
-			this.queryParams = queryParams;
-		}
-
-		/**
-		 * @return the headerParams
-		 */
-		public Map<String, Object> getHeaderParams() {
-			return headerParams;
-		}
-
-		/**
-		 * @param headerParams
-		 *            the headerParams to set
-		 */
-		public void setHeaderParams(Map<String, Object> headerParams) {
-			this.headerParams = headerParams;
-		}
 	}
 
+	@Getter
+	@Setter
 	class WebResponse {
 		int statusCode;
 		String responseBody;
 		InputStream responseStream;
-
-		/**
-		 * @return the statusCode
-		 */
-		public int getStatusCode() {
-			return statusCode;
-		}
-
-		/**
-		 * @param statusCode
-		 *            the statusCode to set
-		 */
-		public void setStatusCode(int statusCode) {
-			this.statusCode = statusCode;
-		}
-
-		/**
-		 * @return the responseBody
-		 */
-		public String getResponseBody() {
-			return responseBody;
-		}
-
-		/**
-		 * @param responseBody
-		 *            the responseBody to set
-		 */
-		public void setResponseBody(String responseBody) {
-			this.responseBody = responseBody;
-		}
-
-		/**
-		 * @return the responseStream
-		 */
-		public InputStream getResponseStream() {
-			return responseStream;
-		}
-
-		/**
-		 * @param responseStream
-		 *            the responseStream to set
-		 */
-		public void setResponseStream(InputStream responseStream) {
-			this.responseStream = responseStream;
-		}
 	}
 }

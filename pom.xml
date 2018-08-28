@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.siva.tools</groupId>
-	<artifactId>com.siva.tools</artifactId>
+	<artifactId>siva-tools</artifactId>
 	<name>Siva's Tools</name>
 
 	<properties>
@@ -39,7 +39,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 
 		<!-- Spring Kafka -->
@@ -50,7 +49,6 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
-			<version>${apache.http.core.version}</version>
 		</dependency>
 
 		<!-- JASYPT dependency -->
@@ -71,26 +69,22 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
 		</dependency>
 
 		<!-- SLF4J-Log4J2 bridge dependency -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j2.version}</version>
 		</dependency>
 
 		<!-- Log4J2 dependencies -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>${log4j2.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>${log4j2.version}</version>
 		</dependency>
 
 		<!-- Commons IO dependency -->
@@ -119,16 +113,36 @@
 			<version>${javax.jms.version}</version> </dependency> -->
 
 		<!-- IBM MQ API dependencies -->
-		<!-- <dependency> <groupId>com.ibm</groupId> <artifactId>com.ibm.mq</artifactId> 
-			<version>${ibm.mq.version}</version> </dependency> <dependency> <groupId>com.ibm</groupId> 
-			<artifactId>com.ibm.mq.pcf</artifactId> <version>${ibm.mq.version}</version> 
-			</dependency> <dependency> <groupId>com.ibm</groupId> <artifactId>com.ibm.mqjms</artifactId> 
-			<version>${ibm.mq.version}</version> </dependency> <dependency> <groupId>com.ibm</groupId> 
-			<artifactId>com.ibm.mq.jmqi</artifactId> <version>${ibm.mq.version}</version> 
-			</dependency> <dependency> <groupId>com.ibm</groupId> <artifactId>com.ibm.mq.headers</artifactId> 
-			<version>${ibm.mq.version}</version> </dependency> <dependency> <groupId>com.ibm</groupId> 
-			<artifactId>com.ibm.mq.commonservices</artifactId> <version>${ibm.mq.version}</version> 
-			</dependency> -->
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.pcf</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mqjms</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.jmqi</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.headers</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq.commonservices</artifactId>
+			<version>${ibm.mq.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

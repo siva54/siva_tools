@@ -2,13 +2,15 @@ package com.siva.utility;
 
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * This is the class that is used to retrieve the settings.
@@ -17,39 +19,25 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
+@Slf4j
 public class SettingsManager {
+	@Autowired
+	@Qualifier(value = "applicationSettings")
+	@Getter
+	@Setter
+	private Properties applicationSettings;
 
 	public static void main(String[] args) {
 		AbstractApplicationContext context = null;
 		try {
-			context = new ClassPathXmlApplicationContext(
-					"spring/base-application-context.xml");
-			SettingsManager settingsManager = context
-					.getBean(SettingsManager.class);
-			LOGGER.info(String.valueOf(settingsManager.getApplicationSettings()));
-
-			LOGGER.error(String.valueOf(settingsManager
-					.getApplicationSettings()));
+			context = new ClassPathXmlApplicationContext("spring/base-application-context.xml");
+			SettingsManager settingsManager = context.getBean(SettingsManager.class);
+			log.info(String.valueOf(settingsManager.getApplicationSettings()));
+			log.info(String.valueOf(settingsManager.getApplicationSettings()));
 		} catch (Exception exception) {
-			exception.printStackTrace();
+			log.error("Exception occurred while acquiring settingsmanager", exception);
 		} finally {
 			context.close();
 		}
-	}
-
-	@Autowired
-	@Qualifier(value = "applicationSettings")
-	private Properties applicationSettings;
-	
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(SettingsManager.class);
-
-	/**
-	 * Method to retrieve application settings.
-	 * 
-	 * @return
-	 */
-	public Properties getApplicationSettings() {
-		return applicationSettings;
 	}
 }
